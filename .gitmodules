@@ -1,0 +1,3 @@
+[submodule "pyCraft"]
+	path = pyCraft
+	url = https://github.com/m3ct/pyCraft.git
