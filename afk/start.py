@@ -149,8 +149,18 @@ def main():
         printColorText(json.loads(chat_packet.json_data))
         print("")
 
+    def keep_alive(packet):
+        print("keep_alive[%d] packet receive." % packet.keep_alive_id)
+        from random import randint
+        ret = serverbound.play.KeepAlivePacket()
+        ret.keep_alive_id = randint(0, 10000) 
+        connection.write_packet(ret)
+        print("Write packet ok.")
+
     connection.register_packet_listener(
         print_color_text, clientbound.play.ChatMessagePacket)
+    connection.register_packet_listener(
+        keep_alive, clientbound.play.KeepAlivePacket)
 
     connection.connect()
 
